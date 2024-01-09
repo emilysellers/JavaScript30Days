@@ -59,9 +59,22 @@
         background: black;
         position: absolute;
         top: 50%;
+        transform-origin: 100%; /* pushes origin of rotate to far right */
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(
+          0.1,
+          2.5,
+          0.5,
+          1
+        ); /* gives hands ticking feature */
       }
     </style>
 
-    <script></script>
+    <script>
+      //  get current time
+      //  use query selector to find hour, minute and second hands and apply time to them
+      //  needs to update every second?
+    </script>
   </body>
 </html>

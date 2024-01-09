@@ -90,7 +90,11 @@
         minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 
         const secondsDegrees = (seconds / 60) * 360 + 90; // +90 offsets default 90deg in styles
-        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        if (seconds === 0) {
+          secondHand.style = "transition: none";
+        } else {
+          secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        }
       }
 
       setInterval(setDate, 1000); // update every second

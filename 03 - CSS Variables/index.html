@@ -79,7 +79,11 @@
       const inputs = document.querySelectorAll(".controls input");
 
       function handleUpdate() {
-        console.log(this.value);
+        const suffix = this.dataset.sizing || ""; // captures the 'data-sizing' attribute
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        ); // updates root CSS variable to input value
       }
 
       inputs.forEach((input) => input.addEventListener("change", handleUpdate));

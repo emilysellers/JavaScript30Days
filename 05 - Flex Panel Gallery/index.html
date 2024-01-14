@@ -86,7 +86,7 @@
       .panel > *:first-child {
         transform: translateY(-100%);
       }
-      .panel.open-active > *.first-child {
+      .panel.open-active > *:first-child {
         transform: translateY(0);
       }
       .panel > *:last-child {
@@ -148,7 +148,16 @@
         this.classList.toggle("open");
       }
 
+      function toggleActive(e) {
+        if (e.propertyName.includes("flex")) {
+          this.classList.toggle("open-active");
+        }
+      }
+
       panels.forEach((panel) => panel.addEventListener("click", toggleOpen));
+      panels.forEach((panel) =>
+        panel.addEventListener("transitionend", toggleActive)
+      );
     </script>
   </body>
 </html>

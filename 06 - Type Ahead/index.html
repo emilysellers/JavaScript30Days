@@ -25,9 +25,13 @@
 
       // add event listener for input change
 
-      // function for matching input to cities in data
-
-      // function for matching input to states in data
+      // function for filtering cities to search input matches
+      function findMatches(wordToMatch, cities) {
+        return cities.filter((place) => {
+          const regex = new RegExp(wordToMatch, "gi");
+          return place.city.match(regex) || place.state.match(regex);
+        });
+      }
 
       // function for adding li for each matching result
     </script>

@@ -23,8 +23,6 @@
         blob.json().then((data) => cities.push(...data))
       );
 
-      // add event listener for input change
-
       // function for filtering cities to search input matches
       function findMatches(wordToMatch, cities) {
         return cities.filter((place) => {
@@ -33,7 +31,11 @@
         });
       }
 
-      // function for adding li for each matching result
+      // add event listener for inputs
+      const searchInput = document.querySelector(".search");
+
+      searchInput.addEventListener("change", displayMatches); //change only fires when you click off element
+      searchInput.addEventListener("keyup", displayMatches); //change only fires when you click off element
     </script>
   </body>
 </html>

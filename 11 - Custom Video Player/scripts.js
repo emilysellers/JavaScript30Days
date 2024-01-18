@@ -10,12 +10,9 @@ const ranges = player.querySelector(".player__slider");
 // build functions
 function togglePlay() {
   // toggle play based on paused property of video
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
+  video.paused ? video.play() : video.pause();
 }
+
 function updateButton() {
   toggle.textContent = this.paused ? "►" : "❚ ❚";
 }

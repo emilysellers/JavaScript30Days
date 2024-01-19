@@ -7,6 +7,22 @@
     <link rel="icon" href="https://fav.farm/🔥" />
   </head>
   <body>
-    <script></script>
+    <script>
+      const pressed = [];
+      const secretCode = "sun";
+      window.addEventListener("keyup", (e) => {
+        pressed.push(e.key);
+        // use negative to start counting from end of array
+        pressed.splice(
+          -secretCode.length - 1,
+          pressed.length - secretCode.length
+        );
+        console.log(pressed);
+        if (pressed.join("").includes(secretCode)) {
+          console.log("YOU GOT IT! 🌞");
+          cornify_add();
+        }
+      });
+    </script>
   </body>
 </html>

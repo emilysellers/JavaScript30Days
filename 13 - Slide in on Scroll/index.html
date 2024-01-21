@@ -243,10 +243,23 @@
       const sliderImages = document.querySelectorAll(".slide-in");
 
       function checkSlide(e) {
-        console.count(e);
+        // animate slider image in when at least %50 of image height is showing in window
+        sliderImages.forEach((slideImage) => {
+          // slide image in when 50% of image has entered window
+          const slideInAt =
+            window.scrollY + window.innerHeight - slideImage.height / 2;
+          const imageBottom = slideImage.offsetTop + slideImage.height; // offsetTop is distance from outer border of current el to top padding edge of parent el
+          const isHalfShown = slideInAt > slideImage.offsetTop;
+          const isNotScrolledPast = window.scrollY < imageBottom;
+          if (isHalfShown && isNotScrolledPast) {
+            slideImage.classList.add("active");
+          } else {
+            slideImage.classList.remove("active");
+          }
+        });
       }
       // wrap checkSlide in debounce so it only runs checkSlide periodically instead of with every scroll event
-      window.addEventListener("scroll", debounce(checkSlide, 200));
+      window.addEventListener("scroll", debounce(checkSlide));
     </script>
 
     <style>

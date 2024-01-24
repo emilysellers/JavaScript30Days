@@ -50,14 +50,16 @@
       </ul>
       <form class="add-items">
         <input type="text" name="item" placeholder="Item Name" required />
-        <input type="submit" value="+ Add Item" />
+        <input type="submit" value="+ Add item" />
       </form>
+      <button id="check-all">Check all items</button>
     </div>
 
     <script>
       const addItems = document.querySelector(".add-items");
       const itemsList = document.querySelector(".plates");
       const items = JSON.parse(localStorage.getItem("items")) || [];
+      const checkAllButton = document.getElementById("check-all");
 
       function addItem(e) {
         e.preventDefault(); // prevents page reload
@@ -95,8 +97,15 @@
         populateList(items, itemsList);
       }
 
+      function checkAllItems() {
+        items.forEach((item) => (item.done = true));
+        localStorage.setItem("items", JSON.stringify(items));
+        populateList(items, itemsList);
+      }
+
       addItems.addEventListener("submit", addItem);
       itemsList.addEventListener("click", toggleDone);
+      checkAllButton.addEventListener("click", checkAllItems);
       // on page load populate list from local storage or empty array
       populateList(items, itemsList);
     </script>

@@ -53,6 +53,7 @@
         <input type="submit" value="+ Add item" />
       </form>
       <button id="check-all">Check all items</button>
+      <button id="uncheck-all">Uncheck all items</button>
     </div>
 
     <script>
@@ -60,6 +61,7 @@
       const itemsList = document.querySelector(".plates");
       const items = JSON.parse(localStorage.getItem("items")) || [];
       const checkAllButton = document.getElementById("check-all");
+      const unCheckAllButton = document.getElementById("uncheck-all");
 
       function addItem(e) {
         e.preventDefault(); // prevents page reload
@@ -102,10 +104,16 @@
         localStorage.setItem("items", JSON.stringify(items));
         populateList(items, itemsList);
       }
+      function unCheckAllItems() {
+        items.forEach((item) => (item.done = false));
+        localStorage.setItem("items", JSON.stringify(items));
+        populateList(items, itemsList);
+      }
 
       addItems.addEventListener("submit", addItem);
       itemsList.addEventListener("click", toggleDone);
       checkAllButton.addEventListener("click", checkAllItems);
+      unCheckAllButton.addEventListener("click", unCheckAllItems);
       // on page load populate list from local storage or empty array
       populateList(items, itemsList);
     </script>

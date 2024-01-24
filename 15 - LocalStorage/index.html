@@ -63,7 +63,7 @@
         e.preventDefault(); // prevents page reload
         const item = {
           name: this.querySelector("[name=item]").value,
-          checked: false,
+          done: false,
         };
 
         items.push(item);
@@ -78,7 +78,7 @@
             return `
           <li>
             <input type="checkbox" data-index=${i} id="items${i}" ${
-              plate.checked ? "checked" : ""
+              plate.done ? "checked" : ""
             }>
             <label for="items${i}">${plate.name}</label>
             </li>`;
@@ -86,8 +86,17 @@
           .join("");
       }
 
-      addItems.addEventListener("submit", addItem);
+      function toggleDone(e) {
+        if (!e.target.matches("input")) return; // skip this unless it's an input
+        const el = e.target;
+        const index = el.dataset.index;
+        items[index].done = !items[index].done;
+        localStorage.setItem("items", JSON.stringify(items));
+        populateList(items, itemsList);
+      }
 
+      addItems.addEventListener("submit", addItem);
+      itemsList.addEventListener("click", toggleDone);
       // on page load populate list from local storage or empty array
       populateList(items, itemsList);
     </script>

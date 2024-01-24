@@ -75,7 +75,12 @@
         platesList.innerHTML = plates
           .map((plate, i) => {
             return `
-          <li><label for="">${plate.name}</label></li>`;
+          <li>
+            <input type="checkbox" data-index=${i} id="items${i}" ${
+              plate.checked ? "checked" : ""
+            }>
+            <label for="items${i}">${plate.name}</label>
+            </li>`;
           })
           .join("");
       }

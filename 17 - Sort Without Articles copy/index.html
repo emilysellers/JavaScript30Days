@@ -47,7 +47,6 @@
     </ul>
 
     <script>
-      const bandList = document.querySelector("#bands");
       const bands = [
         "The Plot in You",
         "The Devil Wears Prada",
@@ -64,21 +63,14 @@
         "An Old Dog",
       ];
 
-      const sortedBands = bands.sort((a, b) => {
-        if (
-          a.replace(/^(a |the |an )/gi, "") > b.replace(/^(a |the |an )/gi, "")
-        ) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-
-      function listBands(sortedBands) {
-        bandList.innerHTML = bands.map((band) => `<li>${band}</li>`).join("");
+      function stripArticles(band) {
+        return band.replace(/^(a |the |an )/gi, "");
       }
 
-      listBands(bands);
+      document.querySelector("#bands").innerHTML = bands
+        .sort((a, b) => (stripArticles(a) > stripArticles(b) ? 1 : -1))
+        .map((band) => `<li>${band}</li>`)
+        .join("");
     </script>
   </body>
 </html>

@@ -26,7 +26,9 @@ function paintToCanvas() {
     // take pixels out. produces array of RGBA value for every pixel in image
     let pixels = ctx.getImageData(0, 0, width, height);
     // alter pixels
-    pixels = redEffect(pixels);
+    // pixels = redEffect(pixels);
+    pixels = rgbSplitEffect(pixels);
+    // ctx.globalAlpha = 0.5; // adds ghost-like effect, stacks on previous frames
     // put pixels back
     ctx.putImageData(pixels, 0, 0);
   }, 16);
@@ -45,6 +47,7 @@ function takePhoto() {
   link.innerHTML = `<img src="${data}" alt="Wonder">`;
   strip.insertBefore(link, strip.firstChild);
 }
+
 function redEffect(pixels) {
   for (let i = 0; i < pixels.data.length; i += 4) {
     pixels.data[i + 0] = pixels.data[i + 0] + 100; // red
@@ -53,6 +56,16 @@ function redEffect(pixels) {
   }
   return pixels;
 }
+
+function rgbSplitEffect(pixels) {
+  for (let i = 0; i < pixels.data.length; i += 4) {
+    pixels.data[i - 250] = pixels.data[i + 0]; // red
+    pixels.data[i + 200] = pixels.data[i + 1]; // blue
+    pixels.data[i - 350] = pixels.data[i + 2]; // green
+  }
+  return pixels;
+}
+
 getVideo();
 
 video.addEventListener("canplay", paintToCanvas); // once video is playing it emits a "canplay" event and calls paintToCanvas

@@ -27,7 +27,17 @@
           .join("");
 
         p.textContent = transcript;
-        console.log(transcript);
+        // check if result is final and create new paragraph
+        if (e.results[0].isFinal) {
+          p = document.createElement("p");
+          words.appendChild(p);
+        }
+
+        // console.log(transcript);
+
+        // if (transcript.includes("turtles")) {
+        //   console.log("🐢🐢🐢🐢🐢🐢🐢🐢🐢");
+        // }
       });
       recognition.addEventListener("end", recognition.start);
 

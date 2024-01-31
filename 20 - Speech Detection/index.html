@@ -20,8 +20,16 @@
       words.appendChild(p);
 
       recognition.addEventListener("result", (e) => {
-        console.log(e);
+        // convert nested transcript data into string
+        const transcript = Array.from(e.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+
+        p.textContent = transcript;
+        console.log(transcript);
       });
+      recognition.addEventListener("end", recognition.start);
 
       recognition.start();
     </script>

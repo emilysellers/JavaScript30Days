@@ -27,8 +27,19 @@ function paintToCanvas() {
 }
 
 function takePhoto() {
+  // play camera shutter sound
   snap.currentTime = 0;
   snap.play();
+  // take data out of canvas
+  const data = canvas.toDataURL("image/jpeg"); // base64 = text based representation of photo
+  // create link to download photo
+  const link = document.createElement("a");
+  link.href = data;
+  link.setAttribute("download", "wonder");
+  link.innerHTML = `<img src="${data}" alt="Wonder">`;
+  strip.insertBefore(link, strip.firstChild);
 }
 
 getVideo();
+
+video.addEventListener("canplay", paintToCanvas); // once video is playing it emits a "canplay" event and calls paintToCanvas

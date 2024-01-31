@@ -10,7 +10,20 @@ function getVideo() {
     .then((localMediaStream) => {
       video.srcObject = localMediaStream;
       video.play();
-    });
+    })
+    .catch((err) => console.error(`Uh oh!`, err));
+}
+
+function paintToCanvas() {
+  const width = video.videoWidth;
+  const height = video.videoHeight;
+  // explicitly set canvas height and width
+  canvas.width = width;
+  canvas.height = height;
+
+  return setInterval(() => {
+    ctx.drawImage(video, 0, 0, width, height); // paints video onto canvas, updates every 16 ms
+  }, 16);
 }
 
 getVideo();

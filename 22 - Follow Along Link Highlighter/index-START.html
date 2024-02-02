@@ -54,10 +54,13 @@
       document.body.append(highlight);
 
       function highlightLink() {
-        // get coords and dims of link moused over
+        // get coords and dimensions of link moused over
         const linkCoords = this.getBoundingClientRect();
+        // set highlight span to match linkCoords height and width
         highlight.style.width = `${linkCoords.width}px`;
         highlight.style.height = `${linkCoords.height}px`;
+        // use transform to set highlight span left and top
+        highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
       }
 
       triggers.forEach((a) => a.addEventListener("mouseenter", highlightLink));

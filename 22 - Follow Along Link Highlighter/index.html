@@ -57,10 +57,17 @@
         // get coords and dimensions of link moused over
         const linkCoords = this.getBoundingClientRect();
         // set highlight span to match linkCoords height and width
-        highlight.style.width = `${linkCoords.width}px`;
-        highlight.style.height = `${linkCoords.height}px`;
+
+        const coords = {
+          width: linkCoords.width,
+          height: linkCoords.height,
+          top: linkCoords.top + window.scrollY,
+          left: linkCoords.left + window.scrollX,
+        };
         // use transform to set highlight span left and top
-        highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+        highlight.style.width = `${coords.width}px`;
+        highlight.style.height = `${coords.height}px`;
+        highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
       }
 
       triggers.forEach((a) => a.addEventListener("mouseenter", highlightLink));

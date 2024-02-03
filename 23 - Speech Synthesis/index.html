@@ -46,6 +46,7 @@
         voices = this.getVoices(); // returns all voice options
         // add voice choices to dropdown
         voicesDropdown.innerHTML = voices
+          .filter((voice) => voice.lang.includes("en"))
           .map(
             (voice) =>
               `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`

@@ -46,9 +46,6 @@
         slider.classList.add("active");
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
-        // console.log(startX);
-        // console.log("scrollLeft: ", scrollLeft);
-        // console.dir(slider);
       });
       slider.addEventListener("mouseleave", () => {
         isDown = false;
@@ -60,6 +57,11 @@
       });
       slider.addEventListener("mousemove", (e) => {
         if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft; // identify current x as mouse moves
+        const walk = x - startX; // calculate mouse scroll distance
+        // const walk = (x - startX) * 5; // alternatively, amplify mouse scroll distance
+        slider.scrollLeft = scrollLeft - walk; // adjust scrollLeft by walk amount
       });
     </script>
   </body>

@@ -1,11 +1,13 @@
 let countdown;
 
 const timerDisplay = document.querySelector(".display__time-left");
+const endTime = document.querySelector(".display__end-time");
 
 function timer(seconds) {
   const now = Date.now();
   const then = now + seconds * 1000;
   displayTimeLeft(seconds);
+  displayEndTime(then);
 
   setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
@@ -25,4 +27,13 @@ function displayTimeLeft(seconds) {
   }${remainderSeconds}`;
   timerDisplay.textContent = display;
   document.title = display;
+}
+
+function displayEndTime(timestamp) {
+  const end = new Date(timestamp);
+  const hour = end.getHours();
+  const minute = end.getMinutes();
+  endTime.textContent = `We're back at ${
+    hour > 12 ? hour - 12 : hour
+  }:${minute}.`;
 }

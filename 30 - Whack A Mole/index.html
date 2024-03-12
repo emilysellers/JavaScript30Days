@@ -42,6 +42,7 @@
       const moles = document.querySelectorAll(".mole");
       let lastHole;
       let gameOver = false;
+      let score = 0;
 
       function randomTime(min, max) {
         return Math.round(Math.random() * (max - min) + min);
@@ -61,7 +62,7 @@
       }
 
       function showMole() {
-        const time = randomTime(100, 2000);
+        const time = randomTime(500, 2000);
         const hole = randomHole(holes);
         hole.classList.add("up");
         setTimeout(() => {
@@ -71,11 +72,23 @@
       }
 
       function startGame() {
+        scoreBoard.textContent = 0;
+        gameOver = false;
+        score = 0;
         showMole();
         setTimeout(() => {
           gameOver = true;
-        }, 5000);
+        }, 10000);
       }
+
+      function whack(e) {
+        if (!e.isTrusted) return; // prevents faked click
+        this.classList.remove("up");
+        score++;
+        scoreBoard.textContent = score;
+      }
+
+      moles.forEach((mole) => mole.addEventListener("click", whack));
     </script>
   </body>
 </html>

@@ -69,6 +69,13 @@
           if (!gameOver) showMole();
         }, time);
       }
+
+      function startGame() {
+        showMole();
+        setTimeout(() => {
+          gameOver = true;
+        }, 5000);
+      }
     </script>
   </body>
 </html>

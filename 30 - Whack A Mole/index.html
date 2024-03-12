@@ -49,10 +49,18 @@
       function randomHole(holes) {
         const idx = Math.floor(Math.random() * holes.length);
         const hole = holes[idx];
+        const time = randomTime(100, 2000);
+
         if (hole === lastHole) {
           console.log("nope thats the last one");
           return randomHole(holes);
         }
+
+        hole.classList.add("up");
+        setTimeout(() => {
+          hole.classList.remove("up");
+        }, time);
+
         lastHole = hole;
         return hole;
       }
